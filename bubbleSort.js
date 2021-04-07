@@ -53,9 +53,15 @@ function swap(arr, a, b) {
 }
 
 function displayArray() {
-    for (let i = 0; i < values.length; i++) { //Prints the array
-        stroke(255);
-        line(i, height, i, height - values[i]);
+    for (let k = 0; k < values.length; k++) { //Prints the array
+        if (k == i) {
+            stroke('#D6FFB7');
+        } else if (k == j) {
+            stroke('#E0777D');
+        } else {
+            stroke(255);
+        }
+        line(k, height, k, height - values[k]);
     }
 }
 
