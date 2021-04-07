@@ -14,12 +14,7 @@ function setup () {
         values[i] = i * (height/width);
     }
 
-    let randomNum;
-
-    for (let i = 0; i < values.length; i++) { //Randomizes the array of numbers to be sorted
-        randomNum = parseInt(random(width));
-        swap(values, i, randomNum);
-    }
+    randomizeArray();
 }
 
 function draw() {
@@ -59,5 +54,14 @@ function displayArray() {
     for (let i = 0; i < values.length; i++) { //Prints the array
         stroke(255);
         line(i, height, i, height - values[i]);
+    }
+}
+
+function randomizeArray() {
+    let randomNum;
+
+    for (let i = 0; i < values.length; i++) { //Randomizes the array of numbers to be sorted
+        randomNum = parseInt(random(width));
+        swap(values, i, randomNum);
     }
 }
