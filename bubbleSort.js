@@ -19,8 +19,10 @@ function setup () {
 
 function draw() {
     background(0);
-
+    
     bubbleSort();
+
+    displayArray();
 }
 
 function bubbleSort() {
@@ -41,7 +43,7 @@ function bubbleSort() {
         noLoop();
     }
 
-    displayArray();
+    displayArray(); //Displays the array each step of bubble sort
 }
 
 function swap(arr, a, b) {
