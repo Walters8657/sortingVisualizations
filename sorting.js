@@ -10,9 +10,17 @@ let j = 0;
 function setup () {
     createCanvas(windowWidth, windowHeight);
     values = new Array(width);
-    for (let i = 0; i < values.length; i++) {
-        values[i] = random(height);
+    for (let i = 0; i < values.length; i++) { //Creates an array of numbers with a smooth slope to the top corner
+        values[i] = i * (height/width);
     }
+
+    let randomNum;
+
+    for (let i = 0; i < values.length; i++) { //Randomizes the array of numbers to be sorted
+        randomNum = parseInt(random(width));
+        swap(values, i, randomNum);
+    }
+
 }
 
 function draw() {
