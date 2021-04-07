@@ -66,7 +66,7 @@ async function partition(arr, start, end) {
 }
 
 async function swapDelay(arr, a, b) {
-    await sleep(0);
+    await sleep(1000/60);
     let temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
