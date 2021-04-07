@@ -3,6 +3,7 @@
 // http://codingtra.in
 
 let values = [];
+let states = [];
 
 let i = 0;
 let j = 0;
@@ -12,6 +13,7 @@ function setup () {
     values = new Array(width);
     for (let i = 0; i < values.length; i++) { //Creates an array of numbers with a smooth slope to the top corner
         values[i] = i * (height/width);
+        states[i] = -1;
     }
 
     randomizeArray();
@@ -31,6 +33,7 @@ async function quickSort(arr, start, end) {
     }
 
     let index = await partition(arr, start, end);
+    states[index] = -1;
 
     await Promise.all([
         quickSort(arr, start, index - 1),
@@ -43,12 +46,22 @@ async function partition(arr, start, end) {
     let pivotValue = arr[end];
 
     for (let i = start; i < end; i++) {
+        states[i] = 1;
         if (arr[i] < pivotValue) {
             await swapDelay(arr, i, pivotIndex);
+            states[pivotIndex] = -1;
             pivotIndex++;
+            states[pivotIndex] = 0;
         }
     }
     await swapDelay(arr, pivotIndex, end);
+
+    for (let i = start; i < end; i++) {
+        if (i != pivotIndex) {
+            states[i] = -1;
+        }
+    }
+
     return pivotIndex;
 }
 
@@ -65,7 +78,13 @@ function sleep(ms) {
 
 function displayArray() {
     for (let i = 0; i < values.length; i++) { //Prints the array
-        stroke(255);
+        if (states[i] == 0) {
+            stroke('#E0777D');
+        } else if(states[i] == 1) {
+            stroke('#D6FFB7');
+        } else  {
+            stroke(255);
+        }
         line(i, height, i, height - values[i]);
     }
 }
