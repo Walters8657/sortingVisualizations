@@ -20,34 +20,44 @@ function setup () {
         randomNum = parseInt(random(width));
         swap(values, i, randomNum);
     }
-
 }
 
 function draw() {
     background(0);
 
-    if (i < values.length) {
-        for (let j = 0; j < values.length - i - 1; j++) {
-            let a = values[j];
-            let b = values[j + 1];
-            if (a > b) {
-                swap(values, j, j + 1);
-            }
+    bubbleSort();
+}
+
+function bubbleSort() {
+    let a = values[j];
+    let b = values[j + 1];
+    if (a > b) {
+        swap(values, j, j + 1);
+    }
+
+    if (i < values.length) { //Manual for loop for outisde for
+        j = j + 1;
+        if (j >= values.length - i - 1) { //Manual for loop for inside for
+            j = 0;
+            i = i + 1;            
         }
     } else {
         console.log('Sorted');
         noLoop();
     }
-    i++;
 
-    for (let i = 0; i < values.length; i++) {
-        stroke(255);
-        line(i, height, i, height - values[i]);
-    }
+    displayArray();
 }
 
 function swap(arr, a, b) {
     let temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
+}
+
+function displayArray() {
+    for (let i = 0; i < values.length; i++) { //Prints the array
+        stroke(255);
+        line(i, height, i, height - values[i]);
+    }
 }
