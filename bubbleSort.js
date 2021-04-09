@@ -55,9 +55,9 @@ function swap(arr, a, b) {
 function displayArray() {
     for (let k = 0; k < values.length; k++) { //Prints the array
         if (k == i) {
-            stroke('#D6FFB7');
+            stroke('red');
         } else if (k == j) {
-            stroke('#E0777D');
+            stroke('green');
         } else {
             stroke(255);
         }
