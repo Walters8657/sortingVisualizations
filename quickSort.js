@@ -79,9 +79,9 @@ function sleep(ms) {
 function displayArray() {
     for (let i = 0; i < values.length; i++) { //Prints the array
         if (states[i] == 0) {
-            stroke('#E0777D');
+            stroke('red');
         } else if(states[i] == 1) {
-            stroke('#D6FFB7');
+            stroke('green');
         } else  {
             stroke(255);
         }
