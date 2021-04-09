@@ -1,7 +1,8 @@
 let values = [];
 
 let i = 0;
-let j, key;
+let key;
+let midsorting = false;
 
 function setup () {
     createCanvas(windowWidth, windowHeight);
@@ -16,24 +17,52 @@ function setup () {
 function draw() {
     background(0);
     
-    j = values.length;
+    //insertionSort();
 
-    if (i < values.length) {
-        key = values[i];
-        j = i - 1;
-        while (j >= 0 && values[j] > key) {
-            values[j + 1] = values[j];
-            j--;
-        }
-        values[j + 1] = key;
-    } else {
-        console.log('Sorted');
-        noLoop();
+    if (i >= values.length) { //Ends loop if at end of array
+            return;
     }
-    i++
+
+    if (!midsorting) { //Controls if outside of the while runs
+        j = i;
+    }
+
+    if (values[j] < values[j-1] && j >= 0) { //Inner while
+        midsorting = true; //Keep running the while
+
+        var temp = values[j-1]; //Holds values[j - 1]
+        values[j-1] = values[j]; //Switches comparison with spot before
+        values[j] = temp; //Switches spot before with comparison
+
+        j--; //Step down one in comparison
+    } else {
+        midsorting = false; //End the while
+    }
+
+    if (!midsorting) { //Controls if outside of the while runs
+        i++; //Go to next array position
+    }
 
     displayArray();
 }
+
+// function insertionSort() {
+//     j = values.length;
+
+//     if (i < values.length) {
+//         key = values[i];
+//         j = i - 1;
+//         while (j >= 0 && values[j] > key) {
+//             values[j + 1] = values[j];
+//             j--;
+//         }
+//         values[j + 1] = key;
+//     } else {
+//         console.log('Sorted');
+//         noLoop();
+//     }
+//     i++
+// }
 
 function displayArray() {
     for (let k = 0; k < values.length; k++) { //Prints the array
@@ -61,8 +90,4 @@ function swap(arr, a, b) {
     let temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
